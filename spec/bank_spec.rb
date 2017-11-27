@@ -13,9 +13,22 @@ describe Bank do
     expect(subject.account[0]).to eq(name)
   end
 
-  it 'is possible to add credit to the account' do
-    credit = 500
+  it 'is possible to add credit to the account and increase balance' do
+    credit = 1000
     subject.add_credit(credit)
     expect(subject.account[1]).to eq(credit)
+    expect(subject.balance).to eq(1000)
   end
+
+  it 'is possible to debit the account and decrease the balance' do
+    credit = 1000
+    subject.add_credit(credit)
+    debit = 500
+    subject.withdraw(debit)
+    expect(subject.balance).to eq(500)
+  end
+
+
+
+
 end
