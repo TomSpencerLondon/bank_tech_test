@@ -2,27 +2,34 @@ class Bank
 
   AMOUNT = 0
 
-  attr_accessor :account, :balance
+  attr_accessor :account, :customer, :balance
 
   def initialize
-    @account = Array.new(5)
+    @customer = { :name => [], :date => [], :credit => [], :debit => [], :balance => [] }
     @balance = AMOUNT
   end
 
   def add_name(name)
-    @account[0] = name
+    @customer[:name] = name
   end
 
   def add_credit(credit)
-    @account = Array.new(5)
-    @account[1] = credit
+    @customer[:credit] = credit
     @balance += credit
   end
 
   def withdraw(debit)
-    @account = Array.new(5)
+    @customer[:debit] = debit
     @balance -= debit
   end
 
+  def save_account
+    file = File.open("account.csv", "w")
+    @customer.each do |detail|
+      csv_line = @customer.join(",")
+      file.puts csv_line
+    end
+    file.close
+  end
 
 end

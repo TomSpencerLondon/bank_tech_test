@@ -28,7 +28,16 @@ describe Bank do
     expect(subject.balance).to eq(500)
   end
 
-
-
+  it 'is possible to save the account information to a CSV file' do
+    filename = "account.csv"
+    file = File.open(filename, "r")
+    file.readlines.each do |line|
+      name, date, credit, debit, balance = line.chomp.split(',')
+      account = subject.account << name, date, credit, debit, balance
+    end
+    p account
+    file.close
+    expect(subject.account[0]).to eq(name)
+  end
 
 end
