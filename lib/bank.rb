@@ -41,7 +41,7 @@ class Bank
   end
 
   def save_account
-    CSV.open("../account.csv", "w") do |csv|
+    CSV.open("../account.csv", "a") do |csv|
       csv << @transaction.values
     end
   end
@@ -53,7 +53,7 @@ class Bank
   def print_statement
     p HEADER
     CSV.foreach("../account.csv") do |row|
-    p row.join("||")
+    p row.join("||") # push into an aray, reverse and then put each line of array
     end
   end
 end
